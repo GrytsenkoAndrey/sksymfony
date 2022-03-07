@@ -6,11 +6,17 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>SK Symfony</title>
-    <link rel="stylesheet" href="http://localhost:8900/public{{ asset('build/app.css') }}">
+    <link rel="stylesheet" href="http://localhost:9010/public{{ asset('build/app.css') }}">
 </head>
 <body>
 <header>
     <h1>My Site</h1>
+    <nav>
+        <ul>
+            <li><a href="{{ path('app_articles') }}">Articles</a></li>
+            <li><a href="{{ path('app_about') }}">About</a></li>
+        </ul>
+    </nav>
 </header>
 {% block content %}{% endblock %}
 <footer>

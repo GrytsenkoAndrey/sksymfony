@@ -5,14 +5,14 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-final class ArticleController extends AbstractController
+final class AboutController extends AbstractController
 {
     /**
-     * @route("/articles", name="app_articles")
+     * @route("/about", name="app_about")
      */
     public function index()
     {
-        return $this->render('article.html.twig', [
+        return $this->render('about.html.twig', [
             'year' => date('Y')
         ]);
     }
