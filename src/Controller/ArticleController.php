@@ -13,7 +13,8 @@ final class ArticleController extends AbstractController
     public function index()
     {
         return $this->render('article.html.twig', [
-            'year' => date('Y')
+            'year' => date('Y'),
+            'likes' => 13
         ]);
     }
 }
