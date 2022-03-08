@@ -3,6 +3,10 @@
 {% block content %}
 <main>
     <h2>Articles</h2>
-    <p>{{ likes }}</p>
+    <p id='ph' class="heart" data-type="like">{{ likes }}</p>
 </main>
+{% endblock %}
+{% block js_footer %}
+    {{ parent() }}
+<script src="http://localhost:9010/{{ asset('js/like.js') }}"></script>
 {% endblock %}
