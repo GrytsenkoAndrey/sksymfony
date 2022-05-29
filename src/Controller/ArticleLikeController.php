@@ -11,7 +11,7 @@ final class ArticleLikeController extends AbstractController
     /**
      * @param $id
      * @param $type
-     * @route("/articles/{id<\d+>}/like/{type<like|dislike>}", methods={"POST"}, name="app_articles_like")
+     * @route("/public/articles/{id<\d+>}/like/{type<like|dislike>}", methods={"POST"}, name="app_articles_like")
      */
     public function like($id, $type)
     {

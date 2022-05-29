@@ -6,7 +6,7 @@ $(function () {
         e.preventDefault();
 
         $.ajax({
-            url: 'http://localhost:9010/public/articles/10/like/' + type,
+            url: 'http://localhost/public/articles/10/like/' + type,
             method: 'POST'
         }).then(function (data) {
             ph.dataset.type = type === 'like' ? 'dislike' : 'like';
