@@ -61,21 +61,15 @@ final class ArticleController extends AbstractController
             if ($article['slug'] === $slug) {
                 $article_content = $parsedown->text($article['content']);
 
-                // by PSR-6
-                $item = $cache->getItem('markdown_' . md5($article_content));
-
-                if (! $item->isHit()) {
-                    $item->set($article_content);
-                    $cache->save($item);
-                }
-
-                $article_content = $item->get();
+                $item = $cache->get('markdown_' . md5($article_content), function () use ($article_content) {
+                    return $article_content;
+                });
             }
         }
 
         return $this->render('show.html.twig', [
             'article' => ucwords(str_replace('-', ' ', $slug)),
-            'articleContent' => $article_content,
+            'articleContent' => $item,
             'comments' => $comments,
             'year' => date('Y')
         ]);
