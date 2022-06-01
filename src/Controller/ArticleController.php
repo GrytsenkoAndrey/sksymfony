@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Demontpx\ParsedownBundle\Parsedown;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -35,8 +36,11 @@ final class ArticleController extends AbstractController
     /**
      * @route("/articles/{slug}", name="app_article_show")
      */
-    public function show(string $slug, Parsedown $parsedown): Response
-    {
+    public function show(
+        string $slug,
+        Parsedown $parsedown,
+        AdapterInterface $cache
+    ): Response {
         $comments = [
             'Tabes risk tanquam noster pars',
             'Nunquam skdoc datalae',
@@ -56,6 +60,16 @@ final class ArticleController extends AbstractController
         foreach ($articles as $article) {
             if ($article['slug'] === $slug) {
                 $article_content = $parsedown->text($article['content']);
+
+                // by PSR-6
+                $item = $cache->getItem('markdown_' . md5($article_content));
+
+                if (! $item->isHit()) {
+                    $item->set($article_content);
+                    $cache->save($item);
+                }
+
+                $article_content = $item->get();
             }
         }
 
