@@ -1,0 +1,18 @@
+{% extends 'layouts/front.html.twig' %}
+
+{% block content %}
+<main>
+    <h2>Article :: {{ article }}</h2>
+    <hr>
+    <p>{{ articleContent }}/p>
+
+    <ul>
+    {% for comment in comments %}
+        <li>{{ comment }}</li>
+    {% endfor %}
+    </ul>
+</main>
+{% endblock %}
+{% block js_footer %}
+    {{ parent() }}
+{% endblock %}

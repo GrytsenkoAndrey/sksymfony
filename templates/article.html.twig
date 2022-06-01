@@ -4,6 +4,11 @@
 <main>
     <h2>Articles</h2>
     <p id='ph' class="heart" data-type="like">{{ likes }}</p>
+    {% for article in articles %}
+    <div>
+        <h4><a href="{{ path('app_article_show', {slug: article.slug }) }}">{{ article.slug }}</a></h4>
+    </div>
+    {% endfor %}
 </main>
 {% endblock %}
 {% block js_footer %}
