@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,12 +14,14 @@ final class ArticleLikeController extends AbstractController
      * @param $type
      * @route("/public/articles/{id<\d+>}/like/{type<like|dislike>}", methods={"POST"}, name="app_articles_like")
      */
-    public function like($id, $type)
+    public function like($id, $type, LoggerInterface $logger)
     {
         if ($type === 'like') {
             $likes = random_int(13, 130);
+            $logger->info('Someone likes article');
         } else {
             $likes = random_int(0, 12);
+            $logger->info('Someone dislikes article');
         }
 
         #return new JsonResponse(['likes' => $likes]);
