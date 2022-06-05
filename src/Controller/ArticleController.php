@@ -15,6 +15,10 @@ final class ArticleController extends AbstractController
      */
     public function index(): Response
     {
+        if ($this->getParameter('docker.example_enabled')) {
+            dd($this->getParameter('docker.docker_prefix'));
+        }
+
         $articles = [
             [
                 'slug' => 'first-article',
