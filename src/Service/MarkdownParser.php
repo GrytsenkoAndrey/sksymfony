@@ -24,11 +24,11 @@ class MarkdownParser
     public function __construct(
         Parsedown $parsedown,
         AdapterInterface $cache,
-        LoggerInterface $markdownLogger
+        LoggerInterface $logger
     ) {
         $this->parsedown = $parsedown;
         $this->cache = $cache;
-        $this->logger = $markdownLogger;
+        $this->logger = $logger;
     }
 
     public function parse(
