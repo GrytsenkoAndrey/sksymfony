@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\MarkdownParser;
 use Demontpx\ParsedownBundle\Parsedown;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
@@ -63,11 +64,8 @@ final class ArticleController extends AbstractController
         ];
         foreach ($articles as $article) {
             if ($article['slug'] === $slug) {
-                $article_content = $parsedown->text($article['content']);
-
-                $item = $cache->get('markdown_' . md5($article_content), function () use ($article_content) {
-                    return $article_content;
-                });
+                $markdownParser = new MarkdownParser();
+                $item = $markdownParser->parse($article['content']);
             }
         }
 
