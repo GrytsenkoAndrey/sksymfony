@@ -44,7 +44,8 @@ final class ArticleController extends AbstractController
     public function show(
         string $slug,
         Parsedown $parsedown,
-        AdapterInterface $cache
+        AdapterInterface $cache,
+        MarkdownParser $markdownParser
     ): Response {
         $comments = [
             'Tabes risk tanquam noster pars',
@@ -64,8 +65,7 @@ final class ArticleController extends AbstractController
         ];
         foreach ($articles as $article) {
             if ($article['slug'] === $slug) {
-                $markdownParser = new MarkdownParser();
-                $item = $markdownParser->parse($article['content']);
+                $item = $markdownParser->parse($article['content'], $parsedown, $cache);
             }
         }
 
