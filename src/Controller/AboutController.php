@@ -12,10 +12,9 @@ final class AboutController extends AbstractController
      */
     public function index($apgSecret)
     {
-        dd($apgSecret);
-
         return $this->render('about.html.twig', [
-            'year' => date('Y')
+            'year' => date('Y'),
+            'secret' => $apgSecret
         ]);
     }
 }
