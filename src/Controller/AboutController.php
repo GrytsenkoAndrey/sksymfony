@@ -10,8 +10,10 @@ final class AboutController extends AbstractController
     /**
      * @route("/about", name="app_about")
      */
-    public function index()
+    public function index($apgSecret)
     {
+        dd($apgSecret);
+
         return $this->render('about.html.twig', [
             'year' => date('Y')
         ]);
