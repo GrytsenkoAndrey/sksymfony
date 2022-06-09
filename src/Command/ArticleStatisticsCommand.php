@@ -37,8 +37,7 @@ class ArticleStatisticsCommand extends Command
 
         switch ($input->getOption('format')) {
             case 'text':
-                $io->title($data['slug']);
-                $io->listing($data);
+                $io->table(array_keys($data), [$data]);
                 break;
             case 'json':
                 $io->write(json_encode($data) . "\n");
