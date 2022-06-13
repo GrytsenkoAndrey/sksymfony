@@ -1,0 +1,43 @@
+{% extends 'base_content.html.twig' %}
+
+{% block title %}Control Comments{% endblock %}
+
+{% block body %}
+    {% block content %}
+        <div class="col-sm-12">
+            <h1>Control comments</h1>
+            <form action="">
+                <div class="input-group mb-3">
+                    <input type="text" name="q" class="form-control" placeholder="Find...">
+                </div>
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-outlin-secondary"><i class="fa fa-question"></i>Find</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-12">
+            <table class="table">
+                <thead>
+                <tr>
+                    <td>Title</td>
+                    <td>Author</td>
+                    <td>Created At</td>
+                    <td>Text</td>
+                </tr>
+                </thead>
+                <tbody>
+                {% for comment in comments %}
+                    <tr>
+                        <td>
+                            <a href="javascript:void(0)">{{ comment.articleTitle }}</a>
+                        </td>
+                        <td>{{ comment.authorName }}</td>
+                        <td>20 days ago</td>
+                        <td>{{ comment.comment }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endblock %}
+{% endblock %}
