@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -11,8 +12,13 @@ class CommentsController extends AbstractController
     /**
     * @route("/admin/comments", name="app_admin_comments")
     */
-    public function index(): Response
+    public function index(Request $request): Response
     {
+        $q = $request->query->get('q');
+        if ($q) {
+            $q = strip_tags($q);
+        }
+
         $comments = [
             [
                 'articleTitle' => 'Is there anything after 9 life?',
@@ -36,6 +42,7 @@ class CommentsController extends AbstractController
 
         return $this->render('admin/comments/index.html.twig', [
             'comments' => $comments,
+            'q' => $q
         ]);
     }
 }
