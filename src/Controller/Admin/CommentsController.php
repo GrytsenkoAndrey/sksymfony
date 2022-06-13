@@ -15,9 +15,6 @@ class CommentsController extends AbstractController
     public function index(Request $request): Response
     {
         $q = $request->query->get('q');
-        if ($q) {
-            $q = strip_tags($q);
-        }
 
         $comments = [
             [
@@ -28,7 +25,7 @@ class CommentsController extends AbstractController
             ],
             [
                 'articleTitle' => 'Where is my food?',
-                'comment' => 'Comment 2',
+                'comment' => 'Value 2',
                 'createdAt' => new \DateTime('-1 days'),
                 'authorName' => 'Cat'
             ],
@@ -40,9 +37,15 @@ class CommentsController extends AbstractController
             ],
         ];
 
+        if ($q) {
+            $q = strip_tags($q);
+            $comments = array_filter($comments, function ($comment) use ($q) {
+                return stripos($comment['comment'], $q) !== false;
+            });
+        }
+
         return $this->render('admin/comments/index.html.twig', [
-            'comments' => $comments,
-            'q' => $q
+            'comments' => $comments
         ]);
     }
 }

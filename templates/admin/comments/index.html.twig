@@ -8,7 +8,7 @@
             <h1>Control comments</h1>
             <form action="">
                 <div class="input-group mb-3">
-                    <input type="text" name="q" class="form-control" placeholder="Find..." value="{{ q }}">
+                    <input type="text" name="q" class="form-control" placeholder="Find..." value="{{ app.request.get('q') }}">
                 </div>
                 <div class="input-group-append">
                     <button type="submit" class="btn btn-outlin-secondary"><i class="fa fa-question"></i>Find</button>
