@@ -19,19 +19,19 @@ class CommentsController extends AbstractController
         $comments = [
             [
                 'articleTitle' => 'Is there anything after 9 life?',
-                'comment' => 'Comment 1',
+                'comment' => 'Comment 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
                 'createdAt' => new \DateTime('-1 hours'),
                 'authorName' => 'Funny'
             ],
             [
                 'articleTitle' => 'Where is my food?',
-                'comment' => 'Value 2',
+                'comment' => 'Value 2. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
                 'createdAt' => new \DateTime('-1 days'),
                 'authorName' => 'Cat'
             ],
             [
                 'articleTitle' => 'What to do if you are boring?',
-                'comment' => 'Comment 3',
+                'comment' => 'Comment 3. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
                 'createdAt' => new \DateTime('-3 days'),
                 'authorName' => 'Symba'
             ],
