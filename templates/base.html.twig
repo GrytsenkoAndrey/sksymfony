@@ -14,6 +14,16 @@
         {% endblock %}
     </head>
     <body>
+    <header>
+        <h1>My Site</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ path('app_articles') }}">Articles</a></li>
+                <li><a href="{{ path('app_about') }}">About</a></li>
+                <li><a href="{{ path('app_admin_comments') }}">Comments</a></li>
+            </ul>
+        </nav>
+    </header>
         {% block body %}{% endblock %}
     </body>
 </html>

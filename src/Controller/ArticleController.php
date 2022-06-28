@@ -2,10 +2,7 @@
 
 namespace App\Controller;
 
-use App\Service\MarkdownParser;
-use Demontpx\ParsedownBundle\Parsedown;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -41,10 +38,7 @@ final class ArticleController extends AbstractController
     /**
      * @route("/articles/{slug}", name="app_article_show")
      */
-    public function show(
-        string $slug,
-        MarkdownParser $markdownParser
-    ): Response {
+    public function show(string $slug): Response {
         $comments = [
             'Tabes risk tanquam noster pars',
             'Nunquam skdoc datalae',
@@ -63,7 +57,7 @@ final class ArticleController extends AbstractController
         ];
         foreach ($articles as $article) {
             if ($article['slug'] === $slug) {
-                $item = $markdownParser->parse($article['content']);
+                $item = $article['content'];
             }
         }
 

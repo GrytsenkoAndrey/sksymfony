@@ -4,7 +4,7 @@
 <main>
     <h2>Article :: {{ article }}</h2>
     <hr>
-    <div>{{ articleContent|raw }}</div>
+    <div>{{ articleContent|cached_markdown }}</div>
 
     <ul>
     {% for comment in comments %}
