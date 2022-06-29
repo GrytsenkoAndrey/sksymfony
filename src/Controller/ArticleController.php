@@ -16,7 +16,7 @@ final class ArticleController extends AbstractController
     public function index(EntityManagerInterface $em): Response
     {
         $repository = $em->getRepository(Article::class);
-        $articles = $repository->findBy([], ['publishedAt' => 'desc']);
+        $articles = $repository->findLatestPublished();
 
         return $this->render('article.html.twig', [
             'year' => date('Y'),
