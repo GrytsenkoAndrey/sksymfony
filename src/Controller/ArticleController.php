@@ -48,8 +48,7 @@ final class ArticleController extends AbstractController
         ];
 
         return $this->render('show.html.twig', [
-            'article' => $article->getTitle(),
-            'articleContent' => $article->getBody(),
+            'article' => $article,
             'comments' => $comments,
             'year' => date('Y')
         ]);

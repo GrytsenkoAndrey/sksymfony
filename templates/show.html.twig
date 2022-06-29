@@ -2,9 +2,10 @@
 
 {% block content %}
 <main>
-    <h2>Article :: {{ article }}</h2>
+    <h2>Article :: {{ article.title }}</h2>
     <hr>
-    <div>{{ articleContent|cached_markdown }}</div>
+    <div>{{ article.body|cached_markdown }}</div>
+    <div><b>Published at: {{ article.publishedAt ? article.publishedAt|ago : 'not published' }}</b></div>
 
     <ul>
     {% for comment in comments %}
