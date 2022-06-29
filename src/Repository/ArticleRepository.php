@@ -80,16 +80,19 @@ class ArticleRepository extends ServiceEntityRepository
 
     private function published(QueryBuilder $builder = null)
     {
-        $qb = $builder ?? $this->createQueryBuilder('a');
-
-        return $qb->andWhere('a.publishedAt IS NOT NULL');
+        return $this->getOrCreateQueryBuilder($builder)
+            ->andWhere('a.publishedAt IS NOT NULL');
     }
 
     private function latest(QueryBuilder $builder = null)
     {
-        $qb = $builder ?? $this->createQueryBuilder('a');
+        return $this->getOrCreateQueryBuilder($builder)
+            ->orderBy('a.publishedAt', 'DESC');
+    }
 
-        return $qb->orderBy('a.publishedAt', 'DESC');
+    private function getOrCreateQueryBuilder(?QueryBuilder $builder): QueryBuilder
+    {
+        return $builder ?? $this->createQueryBuilder('a');
     }
 
 //    public function findOneBySomeField($value): ?Article
