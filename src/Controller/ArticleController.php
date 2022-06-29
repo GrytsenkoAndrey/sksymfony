@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,22 +13,14 @@ final class ArticleController extends AbstractController
     /**
      * @route("/articles", name="app_articles")
      */
-    public function index(): Response
+    public function index(EntityManagerInterface $em): Response
     {
         if ($this->getParameter('docker.example_enabled')) {
             dd($this->getParameter('docker.docker_prefix'));
         }
 
-        $articles = [
-            [
-                'slug' => 'first-article',
-                'content' => 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).'
-            ],
-            [
-                'slug' => 'second-article',
-                'content' => 'Second article for the website. It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).'
-            ],
-        ];
+        $repository = $em->getRepository(Article::class);
+        $articles = $repository->findAll();
 
         return $this->render('article.html.twig', [
             'year' => date('Y'),
@@ -38,32 +32,24 @@ final class ArticleController extends AbstractController
     /**
      * @route("/articles/{slug}", name="app_article_show")
      */
-    public function show(string $slug): Response {
+    public function show(string $slug, EntityManagerInterface $em): Response
+    {
+        $repository = $em->getRepository(Article::class);
+        $article = $repository->findOneBy(['slug' => $slug]);
+
+        if (! $article) {
+            throw $this->createNotFoundException(sprintf('Article with slug %s not found', $slug));
+        }
+
         $comments = [
             'Tabes risk tanquam noster pars',
             'Nunquam skdoc datalae',
             'Sunt acipensa annela audax, mobisil',
         ];
 
-        $articles = [
-            [
-                'slug' => 'first-article',
-                'content' => 'It is a **long** established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).'
-            ],
-            [
-                'slug' => 'second-article',
-                'content' => '_Second article for the website_. It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout! The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).'
-            ],
-        ];
-        foreach ($articles as $article) {
-            if ($article['slug'] === $slug) {
-                $item = $article['content'];
-            }
-        }
-
         return $this->render('show.html.twig', [
-            'article' => ucwords(str_replace('-', ' ', $slug)),
-            'articleContent' => $item,
+            'article' => $article->getTitle(),
+            'articleContent' => $article->getBody(),
             'comments' => $comments,
             'year' => date('Y')
         ]);

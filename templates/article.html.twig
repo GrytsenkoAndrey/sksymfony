@@ -6,7 +6,7 @@
     <p id='ph' class="heart" data-type="like">{{ likes }}</p>
     {% for article in articles %}
     <div>
-        <h4><a href="{{ path('app_article_show', {slug: article.slug }) }}">{{ article.slug }}</a></h4>
+        <h4><a href="{{ path('app_article_show', {slug: article.slug }) }}">{{ article.title }}</a></h4>
     </div>
     {% endfor %}
 </main>
