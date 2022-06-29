@@ -15,12 +15,8 @@ final class ArticleController extends AbstractController
      */
     public function index(EntityManagerInterface $em): Response
     {
-        if ($this->getParameter('docker.example_enabled')) {
-            dd($this->getParameter('docker.docker_prefix'));
-        }
-
         $repository = $em->getRepository(Article::class);
-        $articles = $repository->findAll();
+        $articles = $repository->findBy([], ['publishedAt' => 'desc']);
 
         return $this->render('article.html.twig', [
             'year' => date('Y'),
