@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Article;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -44,13 +45,51 @@ class ArticleRepository extends ServiceEntityRepository
      */
     public function findLatestPublished(): array
     {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.publishedAt IS NOT NULL')
-            ->orderBy('a.publishedAt', 'DESC')
+        $qb = $this->createQueryBuilder('a');
+        $qb = $this->published($qb);
+        $qb = $this->latest($qb);
+
+        return $qb
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    /**
+     * @return Article[] Returns an array of Article objects
+     */
+    public function findLatest(): array
+    {
+        $qb = $this->createQueryBuilder('a');
+
+        return $this->latest($qb)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * @return Article[] Returns an array of Article objects
+     */
+    public function findPublished(): array
+    {
+        $qb = $this->createQueryBuilder('a');
+
+        return $this->published($qb)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    private function published(QueryBuilder $builder)
+    {
+        return $builder->andWhere('a.publishedAt IS NOT NULL');
+    }
+
+    private function latest(QueryBuilder $builder)
+    {
+        return $builder->orderBy('a.publishedAt', 'DESC');
     }
 
 //    public function findOneBySomeField($value): ?Article
