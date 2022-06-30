@@ -21,9 +21,6 @@ class ArticlesController extends AbstractController
     #[Route('/admin/articles/create', name: 'app_admin_articles_create')]
     public function create(EntityManagerInterface $entityManager): Response
     {
-        /*return $this->render('admin/articles/create.html.twig', [
-            'controller_name' => 'ArticlesController',
-        ]);*/
         $article = new Article();
         $postfix = mt_rand(100, 999);
         $article
@@ -34,6 +31,10 @@ class ArticlesController extends AbstractController
         if (rand(1, 10) > 4) {
             $article->setPublishedAt(new \DateTimeImmutable(sprintf('-%d days', rand(0, 30))));
         }
+
+        $article->setAuthor('Best Vasya')
+            ->setLikeCount(random_int(1, 100))
+            ->setImageFilename('simon-hey.png');
 
         $entityManager->persist($article);
         $entityManager->flush();

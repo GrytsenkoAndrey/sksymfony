@@ -4,12 +4,14 @@
 <main>
     <h2>Articles</h2>
     <p id='ph' class="heart" data-type="like">{{ likes }}</p>
+    <div id="div_articles">
     {% for article in articles %}
-    <div>
-        <h4><a href="{{ path('app_article_show', {slug: article.slug }) }}">{{ article.title }}</a></h4>
-        <p><small>published: {{ article.publishedAt ? article.publishedAt|ago }}</small></p>
-    </div>
+        <div class="articles_div_article">
+            <h4><a href="{{ path('app_article_show', {slug: article.slug }) }}">{{ article.title }}</a></h4>
+            <p><small>published: {{ article.publishedAt ? article.publishedAt|ago }}</small></p>
+        </div>
     {% endfor %}
+    </div>
 </main>
 {% endblock %}
 {% block js_footer %}

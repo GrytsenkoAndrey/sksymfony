@@ -1,13 +1,5 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="rounded-lg overflow-hidden flex-md-row mb-4 shadow-sm">
-                    {% block content %}{% endblock %}
-                </div>
-            </div>
-        </div>
-    </div>
+    {% block content %}{% endblock %}
 {% endblock %}
