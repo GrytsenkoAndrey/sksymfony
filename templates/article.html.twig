@@ -8,6 +8,11 @@
     {% for article in articles %}
         <div class="articles_div_article">
             <h4><a href="{{ path('app_article_show', {slug: article.slug }) }}">{{ article.title }}</a></h4>
+            <div><img src="{{ asset(article.imagePath) }}" alt="Article image" title="Article image"></div>
+            <p>
+                <small>author: {{ article.author }}</small>
+                <img src="{{ article.authorAvatarPath }}" width="50" height="50">
+            </p>
             <p><small>published: {{ article.publishedAt ? article.publishedAt|ago }}</small></p>
         </div>
     {% endfor %}

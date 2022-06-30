@@ -122,4 +122,17 @@ class Article
 
         return $this;
     }
+
+    public function getImagePath()
+    {
+        return '/images/' . $this->getImageFilename();
+    }
+
+    public function getAuthorAvatarPath()
+    {
+        return sprintf(
+            'https://robohash.org/%s.png?set=set4',
+            str_replace(' ', '_', $this->getAuthor())
+        );
+    }
 }

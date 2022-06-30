@@ -4,9 +4,13 @@
 <main>
     <h2>Article :: {{ article.title }}</h2>
     <hr>
+    <div><img src="{{ asset(article.imagePath) }}" alt="Article image" title="Article image"></div>
     <div>{{ article.body|cached_markdown }}</div>
     <div><b>Published at: {{ article.publishedAt ? article.publishedAt|ago : 'not published' }}</b></div>
-
+    <div>
+        <b>Written By {{ article.author }}</b>
+        <img src="{{ article.authorAvatarPath }}" alt="{{ article.author }}" title="{{ article.author }}">
+    </div>
     <ul>
     {% for comment in comments %}
         <li>{{ comment }}</li>
