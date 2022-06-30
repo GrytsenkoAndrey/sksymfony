@@ -104,13 +104,6 @@ class Article
         return $this->likeCount;
     }
 
-    public function setLikeCount(?int $likeCount): self
-    {
-        $this->likeCount = $likeCount;
-
-        return $this;
-    }
-
     public function getImageFilename(): ?string
     {
         return $this->imageFilename;
@@ -134,5 +127,19 @@ class Article
             'https://robohash.org/%s.png?set=set4',
             str_replace(' ', '_', $this->getAuthor())
         );
+    }
+
+    public function like()
+    {
+        $this->likeCount++;
+
+        return $this;
+    }
+
+    public function dislike()
+    {
+        $this->likeCount--;
+
+        return $this;
     }
 }

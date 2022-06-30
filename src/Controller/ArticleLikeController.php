@@ -18,10 +18,10 @@ final class ArticleLikeController extends AbstractController
     public function like(Article $article, $type, LoggerInterface $logger, EntityManagerInterface $em): JsonResponse
     {
         if ($type === 'like') {
-            $article->setLikeCount($article->getLikeCount() + 1);
+            $article->like();
             $logger->info('Someone likes article');
         } else {
-            $article->setLikeCount($article->getLikeCount() - 1);
+            $article->dislike();
             $logger->info('Someone dislikes article');
         }
         $em->flush();
