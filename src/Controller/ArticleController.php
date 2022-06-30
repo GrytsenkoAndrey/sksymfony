@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,14 +27,8 @@ final class ArticleController extends AbstractController
     /**
      * @route("/articles/{slug}", name="app_article_show")
      */
-    public function show(string $slug, ArticleRepository $articleRepository): Response
+    public function show(Article $article, ArticleRepository $articleRepository): Response
     {
-        $article = $articleRepository->findOneBy(['slug' => $slug]);
-
-        if (! $article) {
-            throw $this->createNotFoundException(sprintf('Article with slug %s not found', $slug));
-        }
-
         $comments = [
             'Tabes risk tanquam noster pars',
             'Nunquam skdoc datalae',
