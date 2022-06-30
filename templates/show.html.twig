@@ -2,11 +2,22 @@
 
 {% block content %}
 <main>
-    <h2>Article :: {{ article.title }}</h2>
+    <h2>Article :: {{ article.title }}
+        <i id='ph'
+           data-type="like"
+           data-like-href="{{ path('app_articles_like', {slug: article.slug, type: 'like'}) }}"
+           data-dislike-href="{{ path('app_articles_like', {slug: article.slug, type: 'dislike'}) }}">
+            (likes {{ article.likeCount }})
+        </i>
+    </h2>
     <hr>
     <div><img src="{{ asset(article.imagePath) }}" alt="Article image" title="Article image"></div>
     <div>{{ article.body|cached_markdown }}</div>
-    <div><b>Published at: {{ article.publishedAt ? article.publishedAt|ago : 'not published' }}</b></div>
+    <div>
+        <p>
+            <b>Published at: {{ article.publishedAt ? article.publishedAt|ago : 'not published' }}</b>
+        </p>
+    </div>
     <div>
         <b>Written By {{ article.author }}</b>
         <img src="{{ article.authorAvatarPath }}" alt="{{ article.author }}" title="{{ article.author }}">
@@ -20,4 +31,5 @@
 {% endblock %}
 {% block js_footer %}
     {{ parent() }}
+    <script src="http://localhost/{{ asset('js/like.js') }}"></script>
 {% endblock %}

@@ -3,7 +3,6 @@
 {% block content %}
 <main>
     <h2>Articles</h2>
-    <p id='ph' class="heart" data-type="like">{{ likes }}</p>
     <div id="div_articles">
     {% for article in articles %}
         <div class="articles_div_article">
@@ -21,5 +20,4 @@
 {% endblock %}
 {% block js_footer %}
     {{ parent() }}
-<script src="http://localhost/{{ asset('js/like.js') }}"></script>
 {% endblock %}
