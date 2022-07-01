@@ -27,7 +27,6 @@ class ArticleFixtures extends BaseFixtures
 
             $article
                 ->setTitle($title)
-                ->setSlug($slug)
                 ->setBody(ucfirst($this->faker->sentences(13, true)));
 
             if ($this->faker->boolean(60)) {
