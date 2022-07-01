@@ -104,6 +104,13 @@ class Article
         return $this->likeCount;
     }
 
+    public function setLikeCount(?int $likeCount): self
+    {
+        $this->likeCount = $likeCount;
+
+        return $this;
+    }
+
     public function getImageFilename(): ?string
     {
         return $this->imageFilename;
