@@ -2,8 +2,6 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Article;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,7 +17,7 @@ class ArticlesController extends AbstractController
     }
 
     #[Route('/admin/articles/create', name: 'app_admin_articles_create')]
-    public function create(EntityManagerInterface $entityManager): Response
+    public function create(): Response
     {
         return new Response('Here will be page to create an Article');
     }
