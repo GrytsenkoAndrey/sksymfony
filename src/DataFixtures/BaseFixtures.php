@@ -22,13 +22,20 @@ abstract class BaseFixtures extends Fixture
 
     abstract public function loadData(ObjectManager $manager);
 
+    protected function create(string $className, callable $factory): mixed
+    {
+        $entity = new $className;
+        $factory($entity);
+
+        $this->manager->persist($entity);
+
+        return $entity;
+    }
+
     protected function createMany(string $className, int $count, callable $factory)
     {
         for ($i = 0; $i < $count; $i++) {
-            $entity = new $className;
-            $factory($entity);
-
-            $this->manager->persist($entity);
+            $this->create($className, $factory);
         }
         $this->manager->flush();
     }
