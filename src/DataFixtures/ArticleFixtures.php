@@ -9,9 +9,21 @@ use Faker\Factory;
 
 class ArticleFixtures extends Fixture
 {
+    private static $authors = [
+        'Bim',
+        'Vasya',
+        'Black',
+        'Dickson'
+    ];
+
+    private static $images = [
+        'simon-chicken.jpg',
+        'simon-hey.png'
+    ];
+
     public function load(ObjectManager $manager): void
     {
-        for ($cnt = 10, $i = 0; $i < $cnt; $i++) {
+        for ($cnt = 30, $i = 0; $i < $cnt; $i++) {
             $article = new Article();
 
             $faker = Factory::create();
@@ -21,15 +33,15 @@ class ArticleFixtures extends Fixture
             $article
                 ->setTitle($title)
                 ->setSlug($slug)
-                ->setBody(ucfirst($faker->sentences(10, true)));
+                ->setBody(ucfirst($faker->sentences(13, true)));
 
-            if (rand(1, 10) > 4) {
+            if ($faker->boolean(60)) {
                 $article->setPublishedAt(new \DateTimeImmutable(sprintf('-%d days', rand(0, 30))));
             }
 
-            $article->setAuthor($faker->name)
-                ->setLikeCount(random_int(1, 100))
-                ->setImageFilename('simon-hey.png');
+            $article->setAuthor($faker->randomElement(self::$authors))
+                ->setLikeCount($faker->numberBetween(13, 27))
+                ->setImageFilename($faker->randomElement(self::$images));
 
             $manager->persist($article);
         }
