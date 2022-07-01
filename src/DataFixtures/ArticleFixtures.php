@@ -30,7 +30,7 @@ class ArticleFixtures extends BaseFixtures
                 ->setBody(ucfirst($this->faker->sentences(13, true)));
 
             if ($this->faker->boolean(60)) {
-                $article->setPublishedAt(new \DateTimeImmutable(sprintf('-%d days', rand(0, 30))));
+                $article->setPublishedAt($this->faker->dateTimeBetween('-100 days', '-1 days'));
             }
 
             $article->setAuthor($this->faker->randomElement(self::$authors))

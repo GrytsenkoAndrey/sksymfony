@@ -24,7 +24,7 @@ class Article
     #[ORM\Column(type: 'text', nullable: true)]
     private $body;
 
-    #[ORM\Column(type: 'datetime_immutable', nullable: true)]
+    #[ORM\Column(type: 'datetime', nullable: true)]
     private $publishedAt;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
@@ -35,6 +35,14 @@ class Article
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $imageFilename;
+
+    #[Gedmo\Timestampable(on: 'create')]
+    #[ORM\Column(type: 'datetime')]
+    private $createdAt;
+
+    #[Gedmo\Timestampable(on: 'update')]
+    #[ORM\Column(type: 'datetime')]
+    private $updatedAt;
 
     public function getId(): ?int
     {
@@ -77,12 +85,12 @@ class Article
         return $this;
     }
 
-    public function getPublishedAt(): ?\DateTimeImmutable
+    public function getPublishedAt(): ?\DateTime
     {
         return $this->publishedAt;
     }
 
-    public function setPublishedAt(?\DateTimeImmutable $publishedAt): self
+    public function setPublishedAt(?\DateTime $publishedAt): self
     {
         $this->publishedAt = $publishedAt;
 
@@ -148,6 +156,30 @@ class Article
     public function dislike()
     {
         $this->likeCount--;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
