@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
+use App\Repository\CommentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,17 +28,13 @@ final class ArticleController extends AbstractController
     /**
      * @route("/articles/{slug}", name="app_article_show")
      */
-    public function show(Article $article, ArticleRepository $articleRepository): Response
+    public function show(Article $article, CommentRepository $commentRepository): Response
     {
-        $comments = [
-            'Tabes risk tanquam noster pars',
-            'Nunquam skdoc datalae',
-            'Sunt acipensa annela audax, mobisil',
-        ];
-
+        $comments = $commentRepository->findBy(['article' => $article]);
+dd($comments);
         return $this->render('show.html.twig', [
             'article' => $article,
-            'comments' => $comments,
+            'comments' => $comments->findAll(),
             'year' => date('Y')
         ]);
     }
