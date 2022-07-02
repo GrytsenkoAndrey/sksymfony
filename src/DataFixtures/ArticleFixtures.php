@@ -37,12 +37,15 @@ class ArticleFixtures extends BaseFixtures
                 ->setLikeCount($this->faker->numberBetween(13, 27))
                 ->setImageFilename($this->faker->randomElement(self::$images));
 
-            $comment = (new Comment())
-                ->setAuthorName('Bim')
-                ->setContent($this->faker->paragraph)
-                ->setArticle($article);
+            for ($i = 0, $cnt = random_int(1, 3); $i < $cnt; $i++) {
+                $comment = (new Comment())
+                    ->setAuthorName($this->faker->randomElement(self::$authors))
+                    ->setContent($this->faker->paragraph)
+                    ->setCreatedAt($this->faker->dateTimeBetween('-20 hours'))
+                    ->setArticle($article);
 
-            $manager->persist($comment);
+                $manager->persist($comment);
+            }
         });
     }
 }
