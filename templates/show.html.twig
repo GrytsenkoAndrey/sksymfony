@@ -26,7 +26,10 @@
         <p>Quantity of comments {{ article.comments|length }}</p>
         <ul>
             {% for comment in article.comments %}
-                <li>{{ comment.authorName }}: {{ comment.content }} /{{ comment.createdAt|ago }}</li>
+                <li>
+                    {{ comment.authorName }}: {{ comment.content }} /{{ comment.createdAt|ago }}
+                    {% if comment.deletedAt %} DELETED {% endif %}
+                </li>
             {% endfor %}
         </ul>
     </div>
