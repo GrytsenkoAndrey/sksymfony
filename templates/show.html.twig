@@ -23,9 +23,9 @@
         <img src="{{ article.authorAvatarPath }}" alt="{{ article.author }}" title="{{ article.author }}">
     </div>
     <div>
-        <p>Quantity of comments {{ article.comments|length }}</p>
+        <p>Quantity of comments {{ article.nonDeletedComments|length }}</p>
         <ul>
-            {% for comment in article.comments %}
+            {% for comment in article.nonDeletedComments %}
                 <li>
                     {{ comment.authorName }}: {{ comment.content }} /{{ comment.createdAt|ago }}
                     {% if comment.deletedAt %} DELETED {% endif %}
