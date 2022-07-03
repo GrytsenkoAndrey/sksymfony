@@ -41,7 +41,7 @@ class Article
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $imageFilename;
 
-    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Comment::class)]
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Comment::class, fetch: 'EXTRA_LAZY')]
     #[ORM\OrderBy(['createdAt' => 'DESC'])]
     private $comments;
 

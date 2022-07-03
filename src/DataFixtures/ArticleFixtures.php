@@ -37,7 +37,7 @@ class ArticleFixtures extends BaseFixtures
                 ->setLikeCount($this->faker->numberBetween(13, 27))
                 ->setImageFilename($this->faker->randomElement(self::$images));
 
-            for ($i = 0, $cnt = random_int(1, 3); $i < $cnt; $i++) {
+            for ($i = 0, $cnt = random_int(2, 7); $i < $cnt; $i++) {
                 $this->addComment($article, $manager);
             }
         });
