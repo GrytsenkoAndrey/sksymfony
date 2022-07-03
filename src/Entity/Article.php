@@ -42,6 +42,7 @@ class Article
     private $imageFilename;
 
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Comment::class)]
+    #[ORM\OrderBy(['createdAt' => 'DESC'])]
     private $comments;
 
     public function __construct()
