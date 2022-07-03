@@ -38,14 +38,19 @@ class ArticleFixtures extends BaseFixtures
                 ->setImageFilename($this->faker->randomElement(self::$images));
 
             for ($i = 0, $cnt = random_int(1, 3); $i < $cnt; $i++) {
-                $comment = (new Comment())
-                    ->setAuthorName($this->faker->randomElement(self::$authors))
-                    ->setContent($this->faker->paragraph)
-                    ->setCreatedAt($this->faker->dateTimeBetween('-20 hours'))
-                    ->setArticle($article);
-
-                $manager->persist($comment);
+                $this->addComment($article, $manager);
             }
         });
+    }
+
+    private function addComment(Article $article, ObjectManager $manager): void
+    {
+        $comment = (new Comment())
+            ->setAuthorName($this->faker->randomElement(self::$authors))
+            ->setContent($this->faker->paragraph)
+            ->setCreatedAt($this->faker->dateTimeBetween('-20 hours'))
+            ->setArticle($article);
+
+        $manager->persist($comment);
     }
 }
