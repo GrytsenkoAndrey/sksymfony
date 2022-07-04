@@ -44,7 +44,7 @@ class CommentRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('c');
 
         if ($search) {
-            $qb->andWhere('c.content LIKE :search OR c.authorName LIKE :search')
+            $qb->andWhere('c.content LIKE :search OR c.authorName LIKE :search OR a.title LIKE :search')
                 ->setParameter('search', "%$search%");
         }
 
