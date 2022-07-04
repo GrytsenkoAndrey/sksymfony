@@ -4,15 +4,27 @@
 
 {% block body %}
     {% block content %}
-
-        <div class="col-sm-12">
+        <div>
             <h1>Control comments</h1>
             <form action="">
-                <div class="input-group mb-3">
-                    <input type="text" name="q" class="form-control" placeholder="Find..." value="{{ app.request.get('q') }}">
+                <div class="mb-4">
+                    <input type="text"
+                           name="q"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                           placeholder="Find..." value="{{ app.request.query.get('q') }}">
+                </div>
+                <div class="flex items-start mb-6">
+                    <div class="flex items-center h-5">
+                        <input id="showDeleted"
+                               name="showDeleted"
+                               type="checkbox"
+                               {% if app.request.query.has('showDeleted') %} checked {% endif %}
+                               class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800">
+                    </div>
+                    <label for="showDeleted" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Show DELETED</label>
                 </div>
                 <div class="input-group-append">
-                    <button type="submit" class="btn btn-outlin-secondary"><i class="fa fa-question"></i>Find</button>
+                    <button type="submit" class="btn btn-outline-secondary"><i class="fa fa-question"></i>Find</button>
                 </div>
             </form>
         </div>

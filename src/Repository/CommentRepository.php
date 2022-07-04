@@ -39,7 +39,7 @@ class CommentRepository extends ServiceEntityRepository
         }
     }
 
-    public function findAllWithSearch(?string $search)
+    public function findAllWithSearch(?string $search, bool $withSoftDeleted = false)
     {
         $qb = $this->createQueryBuilder('c');
 
@@ -47,6 +47,12 @@ class CommentRepository extends ServiceEntityRepository
             $qb->andWhere('c.content LIKE :search OR c.authorName LIKE :search')
                 ->setParameter('search', "%$search%");
         }
+
+        # name into the disable() - name of the filter from the config/packages/doctrine.yaml
+        if ($withSoftDeleted) {
+            $this->getEntityManager()->getFilters()->disable('softdeleteable');
+        }
+
         return $qb
             ->orderBy('c.createdAt', 'DESC')
             ->getQuery()
