@@ -5,9 +5,10 @@ namespace App\DataFixtures;
 use App\Entity\Article;
 use App\Entity\Comment;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class CommentFixtures extends BaseFixtures
+class CommentFixtures extends BaseFixtures implements DependentFixtureInterface
 {
     private static $authors = [
         'Bim',
@@ -31,5 +32,12 @@ class CommentFixtures extends BaseFixtures
         });
 
         $manager->flush();
+    }
+
+    public function getDependencies()
+    {
+        return [
+            ArticleFixtures::class
+        ];
     }
 }
