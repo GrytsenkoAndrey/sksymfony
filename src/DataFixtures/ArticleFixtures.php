@@ -36,25 +36,6 @@ class ArticleFixtures extends BaseFixtures
             $article->setAuthor($this->faker->randomElement(self::$authors))
                 ->setLikeCount($this->faker->numberBetween(13, 27))
                 ->setImageFilename($this->faker->randomElement(self::$images));
-
-            for ($i = 0, $cnt = random_int(2, 7); $i < $cnt; $i++) {
-                $this->addComment($article, $manager);
-            }
         });
-    }
-
-    private function addComment(Article $article, ObjectManager $manager): void
-    {
-        $comment = (new Comment())
-            ->setAuthorName($this->faker->randomElement(self::$authors))
-            ->setContent($this->faker->paragraph)
-            ->setCreatedAt($this->faker->dateTimeBetween('-20 hours'))
-            ->setArticle($article);
-
-        if ($this->faker->boolean(50)) {
-            $comment->setDeletedAt($this->faker->dateTimeThisMonth);
-        }
-
-        $manager->persist($comment);
     }
 }
