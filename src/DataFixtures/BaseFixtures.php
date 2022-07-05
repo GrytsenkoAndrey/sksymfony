@@ -47,7 +47,7 @@ abstract class BaseFixtures extends Fixture
         if (! isset($this->referenceIndexes[$className])) {
             $this->referenceIndexes[$className] = [];
 
-            foreach ($this->referenceRepository->getReference() as $key => $reference) {
+            foreach ($this->referenceRepository->getReferences() as $key => $reference) {
                 if (strpos($key, $className . '|') === 0) {
                     $this->referenceIndexes[$className][] = $key;
                 }

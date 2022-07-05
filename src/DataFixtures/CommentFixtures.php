@@ -23,7 +23,7 @@ class CommentFixtures extends BaseFixtures
                 ->setAuthorName($this->faker->randomElement(self::$authors))
                 ->setContent($this->faker->paragraph)
                 ->setCreatedAt($this->faker->dateTimeBetween('-20 hours'))
-                ->setArticle($this->getReference(Article::class . '|0'));
+                ->setArticle($this->getRandomReference(Article::class));
 
             if ($this->faker->boolean(50)) {
                 $comment->setDeletedAt($this->faker->dateTimeThisMonth);
