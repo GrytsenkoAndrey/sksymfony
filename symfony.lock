@@ -59,6 +59,9 @@
     "erusev/parsedown": {
         "version": "1.7.4"
     },
+    "knplabs/knp-paginator-bundle": {
+        "version": "v5.8.0"
+    },
     "monolog/monolog": {
         "version": "2.3.5"
     },
