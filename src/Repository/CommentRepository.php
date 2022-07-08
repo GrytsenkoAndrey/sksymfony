@@ -39,7 +39,7 @@ class CommentRepository extends ServiceEntityRepository
         }
     }
 
-    public function findAllWithSearch(?string $search, bool $withSoftDeleted = false)
+    public function findAllWithSearchQuery(?string $search, bool $withSoftDeleted = false)
     {
         $qb = $this->createQueryBuilder('c');
 
@@ -56,8 +56,6 @@ class CommentRepository extends ServiceEntityRepository
         return $qb
             ->innerJoin('c.article', 'a')
             ->addSelect('a')
-            ->orderBy('c.createdAt', 'DESC')
-            ->getQuery()
-            ->getResult();
+            ->orderBy('c.createdAt', 'DESC');
     }
 }
