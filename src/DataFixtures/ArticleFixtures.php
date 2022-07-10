@@ -3,10 +3,11 @@
 namespace App\DataFixtures;
 
 use App\Entity\Article;
-use App\Entity\Comment;
+use App\Entity\Tag;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class ArticleFixtures extends BaseFixtures
+class ArticleFixtures extends BaseFixtures implements DependentFixtureInterface
 {
     private static $authors = [
         'Bim',
@@ -36,6 +37,22 @@ class ArticleFixtures extends BaseFixtures
             $article->setAuthor($this->faker->randomElement(self::$authors))
                 ->setLikeCount($this->faker->numberBetween(13, 27))
                 ->setImageFilename($this->faker->randomElement(self::$images));
+
+            /** @var Tag[] $tags */
+            $tags = [];
+            for ($i = 0, $cnt = random_int(0, 5); $i < $cnt; $i++) {
+                $tags[] = $this->getRandomReference(Tag::class);
+            }
+            foreach ($tags as $tag) {
+                $article->addTag($tag);
+            }
         });
+    }
+
+    public function getDependencies()
+    {
+        return [
+            TagFixture::class
+        ];
     }
 }
