@@ -51,6 +51,10 @@ class ArticleRepository extends ServiceEntityRepository
 
         return $qb
             ->setMaxResults(10)
+            ->leftJoin('a.comments', 'c')
+            ->addSelect('c')
+            ->leftJoin('a.tags', 't')
+            ->addSelect('t')
             ->getQuery()
             ->getResult()
         ;
