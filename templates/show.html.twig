@@ -11,6 +11,16 @@
         </i>
     </h2>
     <hr>
+    {% if article.tags|length %}
+    <div>
+        <ul>
+            {% for tag in article.tags %}
+                <li>{{ tag.name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    <hr>
     <div><img src="{{ asset(article.imagePath) }}" alt="Article image" title="Article image"></div>
     <div>{{ article.body|cached_markdown }}</div>
     <div>

@@ -7,6 +7,15 @@
     {% for article in articles %}
         <div class="articles_div_article">
             <h4><a href="{{ path('app_article_show', {slug: article.slug }) }}">{{ article.title }}</a></h4>
+            {% if article.tags|length %}
+                <div>
+                    <ul>
+                        {% for tag in article.tags %}
+                            <li>{{ tag.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
             <div><img class="logo_img" src="{{ asset(article.imagePath) }}" alt="Article image" title="Article image"></div>
             <p>
                 <small>author: {{ article.author }}</small>
