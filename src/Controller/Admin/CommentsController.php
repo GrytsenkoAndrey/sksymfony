@@ -16,6 +16,8 @@ class CommentsController extends AbstractController
     */
     public function index(Request $request, CommentRepository $commentRepository, PaginatorInterface $paginator): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $comments = $commentRepository->findAllWithSearchQuery(
             $request->query->get('q'),
             $request->query->has('showDeleted')
