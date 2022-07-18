@@ -10,11 +10,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @IsGranted("ROLE_ADMIN")
+ */
 class CommentsController extends AbstractController
 {
     /**
     * @route("/admin/comments", name="app_admin_comments")
-     * @IsGranted("ROLE_ADMIN")
     */
     public function index(Request $request, CommentRepository $commentRepository, PaginatorInterface $paginator): Response
     {
